@@ -26,13 +26,16 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+        randomwalks.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+        randomwalks.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+        randomwalks.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
