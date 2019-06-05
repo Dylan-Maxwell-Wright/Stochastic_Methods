@@ -27,10 +27,12 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
+        paintingtool.cpp \
         randomwalks.cpp
 
 HEADERS += \
         mainwindow.h \
+        paintingtool.h \
         randomwalks.h
 
 FORMS += \
