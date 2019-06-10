@@ -5,6 +5,7 @@
 #include <QFont>
 #include <QPen>
 #include <QWidget>
+#include <QLineF>
 
 class PaintingTool
 {
@@ -13,8 +14,13 @@ public:
 
 public:
     void paintRandomWalk(QPainter *painter, QPaintEvent *event, int speedTimer);
+    void setMaxStep(float m);
 
 private:
+    QLineF randomInterval;
+    float maxStep;
+    float walkSpeed;
+    float angle;
 
 };
 

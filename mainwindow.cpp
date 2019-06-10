@@ -10,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QBrush tb(Qt::transparent);
     ui->randomWalksButton->setPalette(QPalette(tb, tb, tb, tb, tb, tb, tb, tb, tb));
 
+
     timer = new QTimer();
     randomWalks = new RandomWalks();
     connect(timer, &QTimer::timeout, this, &MainWindow::changeRandomWalks);

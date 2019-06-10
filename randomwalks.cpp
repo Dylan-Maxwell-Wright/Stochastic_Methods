@@ -1,6 +1,9 @@
 #include "randomwalks.h"
 #include "ui_randomwalks.h"
 #include "mainwindow.h"
+#include "QPainter"
+#include "QSlider"
+#include "QLineEdit"
 
 RandomWalks::RandomWalks(QWidget *parent) :
     QDialog(parent),
@@ -9,6 +12,8 @@ RandomWalks::RandomWalks(QWidget *parent) :
     ui->setupUi(this);
     Widget *randomWalkWidget = new Widget(&randomWalkPainter, this);
     timer = new QTimer();
+
+
 }
 
 RandomWalks::~RandomWalks()
@@ -18,6 +23,16 @@ RandomWalks::~RandomWalks()
 
 Widget::Widget(PaintingTool *randomWalkPainter, QWidget *parent)
     : QWidget(parent), paintingtool(randomWalkPainter)
+{
+
+}
+
+void Widget::draw()
+{
+
+}
+
+void Widget::paintEvent(QPaintEvent *event)
 {
 
 }
@@ -33,4 +48,11 @@ void RandomWalks::close()
     {
         this->hide();
     }
+}
+
+
+
+void RandomWalks::on_maxStepLengthSlider_sliderMoved(int position)
+{
+    ui->maxStepSliderLabel->setNum(position);
 }

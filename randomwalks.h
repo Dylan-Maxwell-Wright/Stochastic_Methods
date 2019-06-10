@@ -3,6 +3,9 @@
 
 #include <QDialog>
 #include <QTimer>
+#include <QLabel>
+#include <QSlider>
+#include <QLineEdit>
 #include "paintingtool.h"
 
 
@@ -20,16 +23,25 @@ public:
     explicit RandomWalks(QWidget *parent = nullptr);
     ~RandomWalks();
 
-private slots:
+public slots:
     void on_backMain_clicked();
 
     void close();
+
+signals:
+    void sliderPressed();
+
+private slots:
+    void on_maxStepLengthSlider_sliderMoved(int position);
 
 private:
     Ui::RandomWalks *ui;
     QTimer * timer;
     Widget *randomWalkWidget;
     PaintingTool randomWalkPainter;
+    QLabel *maxStepSliderLabel;
+    QSlider *maxStepSlider;
+
 
 };
 
@@ -42,6 +54,7 @@ public:
 
 public slots:
     void draw();
+
 
 protected:
     void paintEvent(QPaintEvent *event) override;
