@@ -6,14 +6,18 @@
 #include <QLabel>
 #include <QSlider>
 #include <QLineEdit>
+#include <QPen>
+#include <QGraphicsScene>
+#include <QGraphicsView>
 #include "paintingtool.h"
+#include "QPicture"
+#include <QRandomGenerator>
+#include <QtMath>
 
 
 namespace Ui {
 class RandomWalks;
 }
-
-class Widget; //forward declaration
 
 class RandomWalks : public QDialog
 {
@@ -23,46 +27,42 @@ public:
     explicit RandomWalks(QWidget *parent = nullptr);
     ~RandomWalks();
 
-public slots:
-    void on_backMain_clicked();
-
-    void close();
-
 signals:
     void sliderPressed();
 
 private slots:
     void on_maxStepLengthSlider_sliderMoved(int position);
 
+    void on_backMain_clicked();
+
+    void close();
+
 private:
+    QGraphicsView *randomWalkArea;
+    QGraphicsScene *randomWalk;
     Ui::RandomWalks *ui;
     QTimer * timer;
-    Widget *randomWalkWidget;
-    PaintingTool randomWalkPainter;
+    PaintingTool *randomWalkPainter;
     QLabel *maxStepSliderLabel;
     QSlider *maxStepSlider;
+    QPicture randomWalkPicture;
+
+    bool paintRandomWalk(QGraphicsScene*, QPen, QPointF);
+
+    qreal randomWalkAngle();
+    QLineF createVector(double, double, QPointF);
+
+    //random walk variables
+    qreal walkLength = 1;
+    qreal walkLengthMult = 5;
+    qreal walkSpeed = 1;
+    qreal walkSpeedMult = 1;
+    QPointF currentPosition;
 
 
 };
 
-class Widget : public QWidget
-{
-    Q_OBJECT
 
-public:
-    Widget(PaintingTool *paintingtool, QWidget *parent);
-
-public slots:
-    void draw();
-
-
-protected:
-    void paintEvent(QPaintEvent *event) override;
-
-private:
-    PaintingTool *paintingtool;
-    int speedTimer;
-};
 
 
 #endif // RANDOMWALKS_H

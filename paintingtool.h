@@ -11,6 +11,13 @@ class PaintingTool
 {
 public:
     PaintingTool();
+    QPen randomWalkPen;
+
+    QPen coordinateAxisPen;
+    QLineF yAxis;
+    QLineF xAxis;
+    QPointF origin;
+
 
 public:
     void paintRandomWalk(QPainter *painter, QPaintEvent *event, int speedTimer);
@@ -21,6 +28,7 @@ private:
     float maxStep;
     float walkSpeed;
     float angle;
+
 
 };
 
