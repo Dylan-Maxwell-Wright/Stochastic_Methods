@@ -45,12 +45,12 @@ private:
     PaintingTool *randomWalkPainter;
     QLabel *maxStepSliderLabel;
     QSlider *maxStepSlider;
-    QPicture randomWalkPicture;
 
-    bool paintRandomWalk(QGraphicsScene*, QPen, QPointF);
+    bool paintRandomWalk(QGraphicsScene*, QPen, QPointF*);
 
     qreal randomWalkAngle();
-    QLineF createVector(double, double, QPointF);
+    QLineF createVector(qreal, qreal, QPointF);
+    QPointF findCurrentPosition(QPointF, QLineF);
 
     //random walk variables
     qreal walkLength = 1;
@@ -58,6 +58,7 @@ private:
     qreal walkSpeed = 1;
     qreal walkSpeedMult = 1;
     QPointF currentPosition;
+
 
 
 };

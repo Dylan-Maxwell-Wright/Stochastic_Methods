@@ -32,7 +32,7 @@ RandomWalks::RandomWalks(QWidget *parent) :
     randomWalk->addLine(randomWalkPaintingTool.xAxis, randomWalkPaintingTool.coordinateAxisPen);
     randomWalk->addLine(randomWalkPaintingTool.yAxis, randomWalkPaintingTool.coordinateAxisPen);
 
-    bool stepTaken = paintRandomWalk(randomWalk, randomWalkPaintingTool.randomWalkPen, currentPosition);
+    bool stepTaken = paintRandomWalk(randomWalk, randomWalkPaintingTool.randomWalkPen, &currentPosition);
 
     QGraphicsView* randomWalkArea = new QGraphicsView(ui->randomWalkArea);
     randomWalkArea->setScene(randomWalk);
@@ -41,19 +41,23 @@ RandomWalks::RandomWalks(QWidget *parent) :
 
 }
 
-bool RandomWalks::paintRandomWalk(QGraphicsScene* randomWalk, QPen walkPen, QPointF currentPosition)
+bool RandomWalks::paintRandomWalk(QGraphicsScene* randomWalk, QPen walkPen, QPointF *currentPosition)
 {
 
     qreal fixedLength = 100;
     qreal fixedSpeed = 1;
     qreal angle = randomWalkAngle();
     QLineF moveVector;
-    QPointF testPoint1(350, 300);
-    moveVector.setP1(testPoint1);
-    QPointF testPoint2(400, 450);
-    moveVector = createVector(angle, fixedLength, currentPosition);
-    //moveVector.setP2(testPoint2);//createVector(angle, fixedLength, currentPosition);
+    moveVector = createVector(angle, fixedLength, *currentPosition);
     randomWalk->addLine(moveVector, walkPen);
+    *currentPosition = findCurrentPosition(*currentPosition, moveVector);
+
+    //findCurrentPositon Test ---- pass
+
+    angle = randomWalkAngle();
+    moveVector = createVector(angle, fixedLength, *currentPosition);
+    randomWalk->addLine(moveVector, walkPen);
+    *currentPosition = findCurrentPosition(*currentPosition, moveVector);
 
 
     return true;
@@ -81,6 +85,17 @@ QLineF RandomWalks::createVector(qreal angle, qreal length, QPointF currentPos)
     */
     return mathVector;
 
+}
+
+QPointF RandomWalks::findCurrentPosition(QPointF lastPos, QLineF moveVec)
+{
+    QPointF finalPos;
+    qreal finalX = lastPos.x() + moveVec.dx();
+    qreal finalY = lastPos.y() + moveVec.dy();
+    finalPos.setX(finalX);
+    finalPos.setY(finalY);
+
+    return finalPos;
 }
 
 RandomWalks::~RandomWalks()
