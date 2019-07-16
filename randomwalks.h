@@ -13,6 +13,7 @@
 #include "QPicture"
 #include <QRandomGenerator>
 #include <QtMath>
+#include <QPropertyAnimation>
 
 
 namespace Ui {
@@ -45,12 +46,14 @@ private:
     PaintingTool *randomWalkPainter;
     QLabel *maxStepSliderLabel;
     QSlider *maxStepSlider;
+    QPropertyAnimation *animatedWalk;
 
     bool paintRandomWalk(QGraphicsScene*, QPen, QPointF*);
 
     qreal randomWalkAngle();
     QLineF createVector(qreal, qreal, QPointF);
     QPointF findCurrentPosition(QPointF, QLineF);
+    void walkSlow(QLineF, QPen, qreal, qreal, QTimer*);
 
     //random walk variables
     qreal walkLength = 1;
