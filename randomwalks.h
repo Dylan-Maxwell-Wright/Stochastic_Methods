@@ -38,6 +38,8 @@ private slots:
 
     void close();
 
+    bool paintRandomWalk(QGraphicsScene*, QPen, QPointF*);
+
 private:
     QGraphicsView *randomWalkArea;
     QGraphicsScene *randomWalk;
@@ -48,15 +50,15 @@ private:
     QSlider *maxStepSlider;
     QPropertyAnimation *animatedWalk;
 
-    bool paintRandomWalk(QGraphicsScene*, QPen, QPointF*);
+
 
     qreal randomWalkAngle();
     QLineF createVector(qreal, qreal, QPointF);
     QPointF findCurrentPosition(QPointF, QLineF);
-    void walkSlow(QLineF, QPen, qreal, qreal, QTimer*);
+    void walkSlow(QLineF, QPen, qreal, qreal, QPointF*);
 
     //random walk variables
-    qreal walkLength = 1;
+    qreal walkLength = 100;
     qreal walkLengthMult = 5;
     qreal walkSpeed = 1;
     qreal walkSpeedMult = 1;
