@@ -14,6 +14,7 @@
 #include "QtMath"
 #include "QPropertyAnimation"
 #include "lineitem.h"
+#include "QSequentialAnimationGroup"
 
 
 RandomWalks::RandomWalks(QWidget *parent) :
@@ -27,20 +28,89 @@ RandomWalks::RandomWalks(QWidget *parent) :
     QPicture randomWalkPicture;
     QPainter randomWalkPainter;
     QLineF testLine(100, 50, 600, 550);
+    QPen randomWalkPen = randomWalkPaintingTool.randomWalkPen;
 
     QPointF currentPosition = randomWalkPaintingTool.origin;
 
+    QSequentialAnimationGroup *randomWalkAnimation = new QSequentialAnimationGroup;
     QGraphicsScene* randomWalk = new QGraphicsScene(QRect(100, 50, 600, 550));
     randomWalk->addLine(randomWalkPaintingTool.xAxis, randomWalkPaintingTool.coordinateAxisPen);
     randomWalk->addLine(randomWalkPaintingTool.yAxis, randomWalkPaintingTool.coordinateAxisPen);
     QGraphicsView* randomWalkArea = new QGraphicsView(ui->randomWalkArea);
 
-    bool stepTaken = paintRandomWalk(randomWalk, randomWalkPaintingTool.randomWalkPen, &currentPosition);
-
+    QPropertyAnimation* animatedWalk = new QPropertyAnimation();
+    //bool stepTaken = paintRandomWalk(randomWalk, randomWalkPaintingTool.randomWalkPen, &currentPosition);
     randomWalkArea->setScene(randomWalk);
     randomWalkArea->render(&randomWalkPainter);
     randomWalkArea->show();
 
+    buildRandomWalk(randomWalkAnimation, randomWalk, randomWalkPen, currentPosition);
+
+    randomWalkAnimation->start();
+}
+
+void RandomWalks::buildRandomWalk(QSequentialAnimationGroup* walkingLanes, QGraphicsScene* randomWalk, QPen walkPen, QPointF startingPoint)
+{
+    /*
+    QPropertyAnimation* nextLineAnimation = new QPropertyAnimation;
+    QLineF animStartVector, moveVector;
+    LineItem* oneStep = new LineItem;
+    qreal angle;
+    qreal tempLength = 100;
+    bool hitEdge = false;
+    int testFive = 0;
+    while (testFive < 5)
+    {
+        angle = randomWalkAngle();
+        animStartVector.setLine(startingPoint.x(), startingPoint.y(), startingPoint.x(), startingPoint.y());
+        moveVector = createVector(angle, tempLength, startingPoint);
+        oneStep->setPen(walkPen);
+        randomWalk->addItem(oneStep);
+        oneStep->setLine(animStartVector);
+        nextLineAnimation->setTargetObject(oneStep);
+        nextLineAnimation->setPropertyName("p2");
+        nextLineAnimation->setStartValue(startingPoint);
+        nextLineAnimation->setEndValue(moveVector.p2());
+        nextLineAnimation->setDuration(1000);
+        walkingLanes->addAnimation(nextLineAnimation);
+        nextLineAnimation->start();
+        startingPoint = setCurrentPosition(startingPoint, moveVector);
+        testFive++;
+    }*/
+    qreal angle;
+    QLineF moveVector;
+    int testFive = 0;
+    while (testFive < 5)
+    {
+        angle = randomWalkAngle();
+        moveVector = createVector(angle, walkLength, startingPoint);
+        walkingLanes->addAnimation(buildRandomWalkHelper(randomWalk, walkPen, startingPoint, moveVector));
+        startingPoint = setCurrentPosition(startingPoint, moveVector);
+        testFive++;
+    }
+}
+
+QPropertyAnimation* RandomWalks::buildRandomWalkHelper(QGraphicsScene *randomWalk, QPen walkPen, QPointF startingPoint, QLineF moveVector)
+{
+    QPropertyAnimation* nextLineAnimation = new QPropertyAnimation;
+    QLineF animStartVector;
+    LineItem* oneStep = new LineItem;
+    qreal angle;
+    qreal tempLength = 1000;
+
+    animStartVector.setLine(startingPoint.x(), startingPoint.y(), startingPoint.x(), startingPoint.y());
+    oneStep->setPen(walkPen);
+    randomWalk->addItem(oneStep);
+    oneStep->setLine(animStartVector);
+    nextLineAnimation->setTargetObject(oneStep);
+    nextLineAnimation->setPropertyName("p2");
+    nextLineAnimation->setStartValue(startingPoint);
+    nextLineAnimation->setEndValue(moveVector.p2());
+    nextLineAnimation->setDuration(1000);
+
+    //nextLineAnimation->start();
+    startingPoint = setCurrentPosition(startingPoint, moveVector);
+    return nextLineAnimation;
 }
 
 bool RandomWalks::paintRandomWalk(QGraphicsScene* randomWalk, QPen walkPen, QPointF *currentPosition)
@@ -55,21 +125,22 @@ bool RandomWalks::paintRandomWalk(QGraphicsScene* randomWalk, QPen walkPen, QPoi
     moveVector = createVector(angle, fixedLength, *currentPosition);
     startVector.setLine(currentPosition->x(), currentPosition->y(), currentPosition->x(), currentPosition->y());
 
-    QGraphicsLineItem *item = randomWalk->addLine(startVector, walkPen);
+    //QGraphicsLineItem *item = randomWalk->addLine(startVector, walkPen);
 
     LineItem *lineItem = new LineItem(QLineF(QPointF(currentPosition->x(), currentPosition->y()), QPointF(currentPosition->x(), currentPosition->y())));
     randomWalk->addItem(lineItem);
     lineItem->setPen(walkPen);
 
-
+    //QPropertyAnimation* animatedWalk = this->animatedWalk;
     QPropertyAnimation* animatedWalk = new QPropertyAnimation(lineItem, "p2");
-
+    animatedWalk->setTargetObject(lineItem);
+    animatedWalk->setPropertyName("p2");
     animatedWalk->setStartValue(*currentPosition);
     animatedWalk->setEndValue(moveVector.p2());
     animatedWalk->setDuration(1000);
 
-    *currentPosition = findCurrentPosition(*currentPosition, moveVector);
-    connect(animatedWalk, SIGNAL(finished()), this, SLOT(paintRandomWalk(QGraphicsScene*, QPen, QPointF*)));
+    *currentPosition = setCurrentPosition(*currentPosition, moveVector);
+    //connect(animatedWalk, SIGNAL(finished()), this, SLOT(walkSlow()));
     animatedWalk->start();
 
 
@@ -94,28 +165,30 @@ bool RandomWalks::paintRandomWalk(QGraphicsScene* randomWalk, QPen walkPen, QPoi
     return true;
 }
 
-void RandomWalks::walkSlow (QLineF moveVector, QPen walkPen, qreal Length, qreal Speed, QPointF *currentPosition)
+
+void RandomWalks::walkSlow ()
 {
     qreal angle = randomWalkAngle();
-    moveVector = createVector(angle, walkLength, *currentPosition);
+    QPointF startingPoint = currentPosition;
+    QLineF moveVector = createVector(angle, walkLength, startingPoint);
     QLineF startVector;
-    startVector.setLine(currentPosition->x(), currentPosition->y(), currentPosition->x(), currentPosition->y());
+    startVector.setLine(startingPoint.x(), startingPoint.y(), startingPoint.x(), startingPoint.y());
 
-    QGraphicsLineItem *item = randomWalk->addLine(startVector, walkPen);
+    //QGraphicsLineItem *item = randomWalk->addLine(startVector, walkPen);
 
-    LineItem *lineItem = new LineItem(QLineF(QPointF(currentPosition->x(), currentPosition->y()), QPointF(currentPosition->x(), currentPosition->y())));
-    randomWalk->addItem(lineItem);
-    lineItem->setPen(walkPen);
+    LineItem *lineItem = new LineItem(startVector);
+    //QGraphicsScene* randomWalkTemp = randomWalk;
+    //randomWalk->addItem(lineItem);
+    //lineItem->setPen(randomWalkPen);
 
 
     QPropertyAnimation* animatedWalk = new QPropertyAnimation(lineItem, "p2");
-    animatedWalk->setStartValue(*currentPosition);
+    animatedWalk->setStartValue(startingPoint);
     animatedWalk->setEndValue(moveVector.p2());
 
 
     animatedWalk->setDuration(10000);
     animatedWalk->start();
-    animatedWalk->finished();
 }
 
 qreal RandomWalks::randomWalkAngle()
@@ -141,7 +214,7 @@ QLineF RandomWalks::createVector(qreal angle, qreal length, QPointF currentPos)
 
 }
 
-QPointF RandomWalks::findCurrentPosition(QPointF lastPos, QLineF moveVec)
+QPointF RandomWalks::setCurrentPosition(QPointF lastPos, QLineF moveVec)
 {
     QPointF finalPos;
     qreal finalX = lastPos.x() + moveVec.dx();

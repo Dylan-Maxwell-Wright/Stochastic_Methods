@@ -14,6 +14,7 @@
 #include <QRandomGenerator>
 #include <QtMath>
 #include <QPropertyAnimation>
+#include <QSequentialAnimationGroup>
 
 
 namespace Ui {
@@ -38,7 +39,7 @@ private slots:
 
     void close();
 
-    bool paintRandomWalk(QGraphicsScene*, QPen, QPointF*);
+    void walkSlow();
 
 private:
     QGraphicsView *randomWalkArea;
@@ -49,16 +50,21 @@ private:
     QLabel *maxStepSliderLabel;
     QSlider *maxStepSlider;
     QPropertyAnimation *animatedWalk;
+    QSequentialAnimationGroup *walkingGroup;
 
 
 
     qreal randomWalkAngle();
     QLineF createVector(qreal, qreal, QPointF);
-    QPointF findCurrentPosition(QPointF, QLineF);
-    void walkSlow(QLineF, QPen, qreal, qreal, QPointF*);
+    QPointF setCurrentPosition(QPointF, QLineF);
+    bool paintRandomWalk(QGraphicsScene*, QPen, QPointF*);
+    void buildRandomWalk(QSequentialAnimationGroup*, QGraphicsScene*, QPen, QPointF);
+    QPropertyAnimation* buildRandomWalkHelper(QGraphicsScene*, QPen, QPointF, QLineF);
+    QPen randomWalkPen;
+
 
     //random walk variables
-    qreal walkLength = 100;
+    qreal walkLength = 20;
     qreal walkLengthMult = 5;
     qreal walkSpeed = 1;
     qreal walkSpeedMult = 1;
