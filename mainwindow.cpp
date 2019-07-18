@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     timer = new QTimer();
     randomWalks = new RandomWalks();
+    randomWalks->setModal(true);
     connect(timer, &QTimer::timeout, this, &MainWindow::changeRandomWalks);
 
 }

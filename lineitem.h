@@ -36,6 +36,7 @@ public:
 
 public slots:
     void makeVisible();
+    void removeFromScene();
 };
 
 #endif // LINEITEM_H

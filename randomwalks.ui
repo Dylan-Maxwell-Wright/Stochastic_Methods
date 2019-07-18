@@ -22,7 +22,7 @@
    </property>
    <property name="geometry">
     <rect>
-     <x>615</x>
+     <x>610</x>
      <y>650</y>
      <width>75</width>
      <height>23</height>
@@ -78,8 +78,8 @@
     <rect>
      <x>260</x>
      <y>600</y>
-     <width>47</width>
-     <height>13</height>
+     <width>31</width>
+     <height>16</height>
     </rect>
    </property>
    <property name="text">
@@ -94,6 +94,87 @@
      <width>500</width>
      <height>500</height>
     </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="walkSpeedLabel">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>630</y>
+     <width>71</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Walk Speed</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QSlider" name="walkSpeedSlider">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>650</y>
+     <width>160</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="QLabel" name="walkSpeedSliderLabel">
+   <property name="geometry">
+    <rect>
+     <x>260</x>
+     <y>650</y>
+     <width>31</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>1</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="startButton">
+   <property name="geometry">
+    <rect>
+     <x>530</x>
+     <y>590</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Start</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pauseButton">
+   <property name="geometry">
+    <rect>
+     <x>530</x>
+     <y>620</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Pause</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="stopButton">
+   <property name="geometry">
+    <rect>
+     <x>530</x>
+     <y>650</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Clear</string>
    </property>
   </widget>
  </widget>

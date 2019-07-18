@@ -39,23 +39,31 @@ private slots:
 
     void close();
 
+    void on_walkSpeedSlider_sliderMoved(int position);
+
 private:
     QGraphicsView *randomWalkArea;
     QGraphicsScene *randomWalk;
     Ui::RandomWalks *ui;
-    QLabel *maxStepSliderLabel;
-    QSlider *maxStepSlider;
+    QLabel *maxStepSliderLabel, *walkSpeedSliderLabel;
+    QSlider *maxStepSlider, *walkSpeedSlider;
     QPropertyAnimation *animatedWalk;
-    QSequentialAnimationGroup *walkingGroup;
+    QSequentialAnimationGroup *randomWalkAnimation;
     QPen randomWalkPen;
 
 
+
+    //random walk methods
+    void buildAxis(QGraphicsScene*);
     qreal randomWalkAngle();
     QLineF createVector(qreal, qreal, QPointF);
     QPointF setCurrentPosition(QPointF, QLineF);
     void buildRandomWalk(QSequentialAnimationGroup*, QGraphicsScene*, QPen, QPointF);
     QPropertyAnimation* buildRandomWalkHelper(QGraphicsScene*, QPen, QPointF, QLineF);
     bool outOfBounds(QRectF, QPointF);
+    void connectPlays(QSequentialAnimationGroup*);
+    void connectPauses(QSequentialAnimationGroup*);
+    void connectStopAndClears(QSequentialAnimationGroup*, QGraphicsView*, QGraphicsScene*);
 
 
     //random walk variables
