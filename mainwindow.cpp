@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     QBrush tb(Qt::transparent);
-    ui->randomWalksButton->setPalette(QPalette(tb, tb, tb, tb, tb, tb, tb, tb, tb));
+    ui->randomWalksButton->setPalette(QColor(0, 0, 0, 0));
 
 
     timer = new QTimer();

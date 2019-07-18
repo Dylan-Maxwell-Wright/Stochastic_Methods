@@ -43,13 +43,11 @@ private:
     QGraphicsView *randomWalkArea;
     QGraphicsScene *randomWalk;
     Ui::RandomWalks *ui;
-    QTimer * timer;
-    PaintingTool *randomWalkPainter;
     QLabel *maxStepSliderLabel;
     QSlider *maxStepSlider;
     QPropertyAnimation *animatedWalk;
     QSequentialAnimationGroup *walkingGroup;
-
+    QPen randomWalkPen;
 
 
     qreal randomWalkAngle();
@@ -57,17 +55,15 @@ private:
     QPointF setCurrentPosition(QPointF, QLineF);
     void buildRandomWalk(QSequentialAnimationGroup*, QGraphicsScene*, QPen, QPointF);
     QPropertyAnimation* buildRandomWalkHelper(QGraphicsScene*, QPen, QPointF, QLineF);
-    QPen randomWalkPen;
+    bool outOfBounds(QRectF, QPointF);
 
 
     //random walk variables
-    qreal walkLength = 20;
+    qreal walkLength = 100;
     qreal walkLengthMult = 5;
     qreal walkSpeed = 1;
     qreal walkSpeedMult = 1;
     QPointF currentPosition;
-
-
 
 };
 

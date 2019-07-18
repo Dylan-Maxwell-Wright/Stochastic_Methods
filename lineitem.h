@@ -3,6 +3,7 @@
 
 #include <QGraphicsLineItem>
 #include <QObject>
+#include <paintingtool.h>
 
 class LineItem: public QObject, public QGraphicsLineItem
 {
@@ -32,6 +33,9 @@ public:
         l.setP2(p);
         setLine(l);
     }
+
+public slots:
+    void makeVisible();
 };
 
 #endif // LINEITEM_H
