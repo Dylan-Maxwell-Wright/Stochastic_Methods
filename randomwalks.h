@@ -39,8 +39,6 @@ private slots:
 
     void close();
 
-    void walkSlow();
-
 private:
     QGraphicsView *randomWalkArea;
     QGraphicsScene *randomWalk;
@@ -57,7 +55,6 @@ private:
     qreal randomWalkAngle();
     QLineF createVector(qreal, qreal, QPointF);
     QPointF setCurrentPosition(QPointF, QLineF);
-    bool paintRandomWalk(QGraphicsScene*, QPen, QPointF*);
     void buildRandomWalk(QSequentialAnimationGroup*, QGraphicsScene*, QPen, QPointF);
     QPropertyAnimation* buildRandomWalkHelper(QGraphicsScene*, QPen, QPointF, QLineF);
     QPen randomWalkPen;
