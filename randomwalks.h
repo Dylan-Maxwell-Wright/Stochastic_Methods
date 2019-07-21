@@ -10,7 +10,6 @@
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include "paintingtool.h"
-#include "QPicture"
 #include <QRandomGenerator>
 #include <QtMath>
 #include <QPropertyAnimation>
@@ -41,6 +40,8 @@ private slots:
 
     void on_walkSpeedSlider_sliderMoved(int position);
 
+    void on_buildButton_clicked();
+
 private:
     QGraphicsView *randomWalkArea;
     QGraphicsScene *randomWalk;
@@ -56,21 +57,18 @@ private:
     //random walk methods
     void buildAxis(QGraphicsScene*);
     qreal randomWalkAngle();
-    QLineF createVector(qreal, qreal, QPointF);
+    QLineF createVector(qreal, QPointF);
     QPointF setCurrentPosition(QPointF, QLineF);
-    void buildRandomWalk(QSequentialAnimationGroup*, QGraphicsScene*, QPen, QPointF);
-    QPropertyAnimation* buildRandomWalkHelper(QGraphicsScene*, QPen, QPointF, QLineF);
+    void buildRandomWalk(QSequentialAnimationGroup*, QGraphicsScene*, QPointF);
+    QPropertyAnimation* buildRandomWalkHelper(QGraphicsScene*, QPointF, QLineF);
     bool outOfBounds(QRectF, QPointF);
     void connectPlays(QSequentialAnimationGroup*);
     void connectPauses(QSequentialAnimationGroup*);
-    void connectStopAndClears(QSequentialAnimationGroup*, QGraphicsView*, QGraphicsScene*);
-
 
     //random walk variables
-    qreal walkLength = 100;
-    qreal walkLengthMult = 5;
+    qreal walkLength = 20;
+    qreal walkLengthMult = 1;
     qreal walkSpeed = 1;
-    qreal walkSpeedMult = 1;
     QPointF currentPosition;
 
 };

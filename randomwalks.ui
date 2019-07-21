@@ -121,6 +121,12 @@
      <height>22</height>
     </rect>
    </property>
+   <property name="minimum">
+    <number>1</number>
+   </property>
+   <property name="maximum">
+    <number>30</number>
+   </property>
    <property name="orientation">
     <enum>Qt::Horizontal</enum>
    </property>
@@ -141,7 +147,7 @@
   <widget class="QPushButton" name="startButton">
    <property name="geometry">
     <rect>
-     <x>530</x>
+     <x>610</x>
      <y>590</y>
      <width>75</width>
      <height>23</height>
@@ -154,7 +160,7 @@
   <widget class="QPushButton" name="pauseButton">
    <property name="geometry">
     <rect>
-     <x>530</x>
+     <x>610</x>
      <y>620</y>
      <width>75</width>
      <height>23</height>
@@ -164,17 +170,17 @@
     <string>Pause</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="stopButton">
+  <widget class="QPushButton" name="buildButton">
    <property name="geometry">
     <rect>
      <x>530</x>
-     <y>650</y>
+     <y>590</y>
      <width>75</width>
      <height>23</height>
     </rect>
    </property>
    <property name="text">
-    <string>Clear</string>
+    <string>Build Walk</string>
    </property>
   </widget>
  </widget>
