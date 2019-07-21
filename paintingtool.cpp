@@ -20,10 +20,4 @@ PaintingTool::PaintingTool()
     PaintingTool::origin.setY(300);
 }
 
-void PaintingTool::paintRandomWalk(QPainter *painter, QPaintEvent *event, int speedTimer)
-{
-
-}
-
-
 

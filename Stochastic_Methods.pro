@@ -25,12 +25,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+        lineitem.cpp \
         main.cpp \
         mainwindow.cpp \
         paintingtool.cpp \
         randomwalks.cpp
 
 HEADERS += \
+        lineitem.h \
         mainwindow.h \
         paintingtool.h \
         randomwalks.h
