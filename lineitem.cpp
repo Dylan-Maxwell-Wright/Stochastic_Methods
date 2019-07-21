@@ -7,8 +7,3 @@ void LineItem::makeVisible()
     setPen(randomWalkPaintingTool.randomWalkPen);
 }
 
-void LineItem::removeFromScene()
-{
-    this->~LineItem();
-}
-

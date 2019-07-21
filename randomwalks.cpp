@@ -23,7 +23,6 @@ RandomWalks::RandomWalks(QWidget *parent) :
 {
     ui->setupUi(this);
 
-
 }
 
 void RandomWalks::buildRandomWalk(QSequentialAnimationGroup* walkingLanes, QGraphicsScene* randomWalk, QPointF startingPoint)
