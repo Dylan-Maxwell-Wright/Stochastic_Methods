@@ -108,11 +108,6 @@ RandomWalks::~RandomWalks()
 
 void RandomWalks::on_backMain_clicked()
 {
-    close();
-}
-
-void RandomWalks::close()
-{
     if(this->isVisible())
     {
         this->hide();

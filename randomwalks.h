@@ -36,8 +36,6 @@ private slots:
 
     void on_backMain_clicked();
 
-    void close();
-
     void on_walkSpeedSlider_sliderMoved(int position);
 
     void on_buildButton_clicked();

@@ -25,6 +25,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+        brownianmotion.cpp \
         lineitem.cpp \
         main.cpp \
         mainwindow.cpp \
@@ -32,12 +33,14 @@ SOURCES += \
         randomwalks.cpp
 
 HEADERS += \
+        brownianmotion.h \
         lineitem.h \
         mainwindow.h \
         paintingtool.h \
         randomwalks.h
 
 FORMS += \
+        brownianmotion.ui \
         mainwindow.ui \
         randomwalks.ui
 

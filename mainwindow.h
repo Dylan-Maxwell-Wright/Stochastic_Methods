@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QTimer>
 #include <randomwalks.h>
+#include <brownianmotion.h>
 
 namespace Ui {
 class MainWindow;
@@ -23,10 +24,15 @@ private slots:
 
     void on_randomWalksButton_clicked();
 
+    void on_brownianMotionPushButton_clicked();
+
+    void changeBrownianMotion();
+
 private:
     Ui::MainWindow *ui;
     QTimer * timer;
     RandomWalks *randomWalks;
+    BrownianMotion *brownianMotion;
 };
 
 #endif // MAINWINDOW_H

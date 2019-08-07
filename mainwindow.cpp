@@ -13,7 +13,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     timer = new QTimer();
     randomWalks = new RandomWalks();
+    brownianMotion = new BrownianMotion();
     randomWalks->setModal(true);
+    brownianMotion->setModal(true);
+
     connect(timer, &QTimer::timeout, this, &MainWindow::changeRandomWalks);
 
 }
@@ -25,13 +28,17 @@ MainWindow::~MainWindow()
 
 void MainWindow::changeRandomWalks()
 {
-    if(randomWalks->isVisible())
-    {
-
-    }
-    else
+    if(!randomWalks->isVisible())
     {
         randomWalks->show();
+    }
+}
+
+void MainWindow::changeBrownianMotion()
+{
+    if(!brownianMotion->isVisible())
+    {
+        brownianMotion->show();
     }
 }
 
@@ -40,4 +47,7 @@ void MainWindow::on_randomWalksButton_clicked()
     changeRandomWalks();
 }
 
-
+void MainWindow::on_brownianMotionPushButton_clicked()
+{
+    changeBrownianMotion();
+}
