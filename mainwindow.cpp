@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "demo.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -10,7 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QBrush tb(Qt::transparent);
     ui->randomWalksButton->setPalette(QColor(0, 0, 0, 0));
 
-
+    demo randomWalksDemo = demo(ui->randomWalksDemoView);
     timer = new QTimer();
     randomWalks = new RandomWalks();
     brownianMotion = new BrownianMotion();

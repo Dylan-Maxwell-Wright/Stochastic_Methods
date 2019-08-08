@@ -5,6 +5,7 @@
 #include <QTimer>
 #include <randomwalks.h>
 #include <brownianmotion.h>
+#include <demo.h>
 
 namespace Ui {
 class MainWindow;

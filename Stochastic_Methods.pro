@@ -26,6 +26,7 @@ CONFIG += c++11
 
 SOURCES += \
         brownianmotion.cpp \
+        demo.cpp \
         lineitem.cpp \
         main.cpp \
         mainwindow.cpp \
@@ -34,6 +35,7 @@ SOURCES += \
 
 HEADERS += \
         brownianmotion.h \
+        demo.h \
         lineitem.h \
         mainwindow.h \
         paintingtool.h \

@@ -39,7 +39,7 @@
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QGraphicsView" name="graphicsView">
+   <widget class="QGraphicsView" name="randomWalksDemoView">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -52,7 +52,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QGraphicsView" name="graphicsView_2">
+   <widget class="QGraphicsView" name="brownianMotionDemoView">
     <property name="geometry">
      <rect>
       <x>570</x>
