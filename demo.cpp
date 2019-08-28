@@ -26,7 +26,7 @@ void demo::demoRandomWalk(QGraphicsView *targetView)
     buildDemoRandomWalk(randomWalkAnimation, randomWalkDemo, currentPosition);
     randomWalkAnimation->setLoopCount(-1);
     randomWalkAnimation->start();
-    QObject::connect(randomWalkAnimation, SIGNAL(currentLoopChanged(int)), randomWalkAnimation, SLOT(setCurrentTime(int)));
+
 }
 
 void demo::buildDemoRandomWalk(QSequentialAnimationGroup* walkingLanes, QGraphicsScene* randomWalk, QPointF startingPoint)

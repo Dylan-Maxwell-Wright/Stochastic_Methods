@@ -7,14 +7,18 @@
 #include <QSequentialAnimationGroup>
 #include <QPropertyAnimation>
 #include <QRandomGenerator>
+#include <QObject>
 
-class demo
+class demo: public QObject
 {
+    Q_OBJECT
 
 public:
     demo(QGraphicsView*);
+    ~demo();
     void demoRandomWalk(QGraphicsView*);
     void buildDemoRandomWalk(QSequentialAnimationGroup*, QGraphicsScene*, QPointF);
+
 
 private:
     QPropertyAnimation* buildDemoRandomWalkHelper(QGraphicsScene*, QPointF, QLineF);
