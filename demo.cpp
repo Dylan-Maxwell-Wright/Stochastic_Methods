@@ -4,12 +4,12 @@
 #include "lineitem.h"
 #include "QObject"
 
-demo::demo(QGraphicsView *target)
+Demo::Demo(QGraphicsView *target)
 {
     demoRandomWalk(target);
 }
 
-void demo::demoRandomWalk(QGraphicsView *targetView)
+void Demo::demoRandomWalk(QGraphicsView *targetView)
 {
     QGraphicsScene* randomWalkDemo = new QGraphicsScene(targetView->rect());
     QGraphicsView* randomWalkDemoArea = new QGraphicsView(targetView);
@@ -24,12 +24,12 @@ void demo::demoRandomWalk(QGraphicsView *targetView)
 
     QSequentialAnimationGroup *randomWalkAnimation = new QSequentialAnimationGroup();
     buildDemoRandomWalk(randomWalkAnimation, randomWalkDemo, currentPosition);
-    randomWalkAnimation->setLoopCount(-1);
+    //randomWalkAnimation->setLoopCount(-1);
     randomWalkAnimation->start();
 
 }
 
-void demo::buildDemoRandomWalk(QSequentialAnimationGroup* walkingLanes, QGraphicsScene* randomWalk, QPointF startingPoint)
+void Demo::buildDemoRandomWalk(QSequentialAnimationGroup* walkingLanes, QGraphicsScene* randomWalk, QPointF startingPoint)
 {
     bool outOfArea = false;
     qreal angle;
@@ -44,23 +44,23 @@ void demo::buildDemoRandomWalk(QSequentialAnimationGroup* walkingLanes, QGraphic
     }
 }
 
-QLineF demo::createVector(qreal angle, QPointF currentPos)
+QLineF Demo::createVector(qreal angle, QPointF currentPos)
 {
 
-    qreal dX = qCos(angle) * 20;
-    qreal dY = qSin(angle) * 20;
+    qreal dX = qCos(angle) * 25;
+    qreal dY = qSin(angle) * 25;
     QPointF finalPos(currentPos.x() + dX, currentPos.y() + dY);
     QLineF mathVector(currentPos, finalPos);
 
     return mathVector;
 }
 
-QPropertyAnimation* demo::buildDemoRandomWalkHelper(QGraphicsScene *randomWalk,  QPointF startingPoint, QLineF moveVector)
+QPropertyAnimation* Demo::buildDemoRandomWalkHelper(QGraphicsScene *randomWalk,  QPointF startingPoint, QLineF moveVector)
 {
     QPropertyAnimation* nextLineAnimation = new QPropertyAnimation();
     QLineF animStartVector;
     LineItem* oneStep = new LineItem;
-    qreal durration = (50 * 10) / 1.5;
+    qreal durration = (50 * 10) / 1.2;
 
     animStartVector.setLine(startingPoint.x(), startingPoint.y(), startingPoint.x(), startingPoint.y());
     oneStep->setPen(QColor(0, 0, 0, 0));
@@ -78,7 +78,7 @@ QPropertyAnimation* demo::buildDemoRandomWalkHelper(QGraphicsScene *randomWalk, 
     return nextLineAnimation;
 }
 
-QPointF demo::setCurrentPosition(QPointF lastPos, QLineF moveVec)
+QPointF Demo::setCurrentPosition(QPointF lastPos, QLineF moveVec)
 {
     QPointF finalPos;
     qreal finalX = lastPos.x() + moveVec.dx();
@@ -89,7 +89,7 @@ QPointF demo::setCurrentPosition(QPointF lastPos, QLineF moveVec)
     return finalPos;
 }
 
-bool demo::outOfBounds(QRectF sceneArea, QPointF point2)
+bool Demo::outOfBounds(QRectF sceneArea, QPointF point2)
 {
     bool inBounds;
     inBounds = sceneArea.contains(point2);

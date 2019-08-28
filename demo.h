@@ -9,13 +9,12 @@
 #include <QRandomGenerator>
 #include <QObject>
 
-class demo: public QObject
+class Demo
 {
-    Q_OBJECT
 
 public:
-    demo(QGraphicsView*);
-    ~demo();
+    Demo(QGraphicsView*);
+    ~Demo();
     void demoRandomWalk(QGraphicsView*);
     void buildDemoRandomWalk(QSequentialAnimationGroup*, QGraphicsScene*, QPointF);
 

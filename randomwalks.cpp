@@ -15,6 +15,7 @@
 #include "QPropertyAnimation"
 #include "lineitem.h"
 #include "QSequentialAnimationGroup"
+#include "demo.h"
 
 
 RandomWalks::RandomWalks(QWidget *parent) :

@@ -25,4 +25,5 @@ private:
 
 };
 
+
 #endif // PAINTINGTOOLS_H

@@ -29,9 +29,12 @@ private slots:
 
     void changeBrownianMotion();
 
+    void resetDemos();
+
 private:
     Ui::MainWindow *ui;
     QTimer * timer;
+    QTimer * demoTimer;
     RandomWalks *randomWalks;
     BrownianMotion *brownianMotion;
 };

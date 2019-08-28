@@ -11,9 +11,14 @@ MainWindow::MainWindow(QWidget *parent) :
     QBrush tb(Qt::transparent);
     ui->randomWalksButton->setPalette(QColor(0, 0, 0, 0));
 
-    demo* randomWalksDemo;
-    randomWalksDemo = new demo(ui->randomWalksDemoView);
+    Demo* randomWalksDemo = new Demo(ui->randomWalksDemoView);
+    demoTimer = new QTimer(this);
+    connect(demoTimer, SIGNAL(timeout()), this, SLOT(resetDemos()));
+    demoTimer->start(10000);
+
     timer = new QTimer();
+
+
     randomWalks = new RandomWalks();
     brownianMotion = new BrownianMotion();
     randomWalks->setModal(true);
@@ -52,4 +57,9 @@ void MainWindow::on_randomWalksButton_clicked()
 void MainWindow::on_brownianMotionPushButton_clicked()
 {
     changeBrownianMotion();
+}
+
+void MainWindow::resetDemos()
+{
+    Demo* randomWalkDemo = new Demo(ui->randomWalksDemoView);
 }
